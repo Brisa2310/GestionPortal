@@ -10,4 +10,5 @@ Aplicacion ASP.NET CORE MVC con Entity Framework Core.
 
 # Instalacion
 - Clonacion del repositorio 
+- test
 
