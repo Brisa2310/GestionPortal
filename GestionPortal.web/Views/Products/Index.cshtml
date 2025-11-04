@@ -1,0 +1,68 @@
+﻿@model IEnumerable<GestionPortal.web.Models.Entities.Product>
+
+@{
+    ViewData["Title"] = "Lista de Productos";
+    var categorias = Model.Select(p => p.Category).Distinct();
+}
+
+<h2>Lista de Productos</h2>
+<a asp-action="Create" class="btn btn-primary">Crear nuevo Producto</a>
+
+<br />
+<label>Buscar por categoria</label>
+<select class="form-control" id="categoriaDropdown">
+    <option value="">Todos</option>
+    @foreach (var categoria in categorias)
+    {
+        <option value="@categoria">@categoria</option>
+    }
+</select>
+<br />
+<table class="table" id="tablaProductos">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Categoria</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Category</td>
+                <td>
+                    <a asp-action="Update" class="btn btn-warning" asp-route-id="@product.Id">Editar</a>
+                    <form asp-action="Delete" asp-route-id="@product.Id" onsubmit="return confirm('Esta seguro de eliminar el producto?');">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>  
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const select = document.querySelector('#categoriaDropdown');
+            const filas = document.querySelectorAll('#tablaProductos tbody tr');
+
+            select.addEventListener('change', () => {
+                const categoriaSeleccionada = select.value.toLowerCase();
+
+                filas.forEach(fila => {
+                    const categoriaFila = fila.cells[2].innerText.toLowerCase();
+
+                    fila.style.display =
+                        categoriaSeleccionada === '' || categoriaFila === categoriaSeleccionada
+                            ? ''
+                            : 'none';
+                });
+            });
+        });
+    </script>
+}
