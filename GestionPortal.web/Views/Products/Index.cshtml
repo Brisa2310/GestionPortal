@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "Lista de Productos";
     var categorias = Model.Select(p => p.Category).Distinct();
+    decimal precioTotal = Model.Sum(p => p.Price);
+    int productosTotal = Model.Count();
+    decimal PrecioPromedio = productosTotal > 0 ? precioTotal / productosTotal : 0;
 }
 
 <h2>Lista de Productos</h2>
@@ -44,6 +47,11 @@
         }
     </tbody>
 </table>
+
+<label>Precio Promedio de los Productos</label>
+<label>
+    @PrecioPromedio.ToString("0.00");
+</label>
 
 @section Scripts {
     <script>
