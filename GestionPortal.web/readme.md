@@ -24,4 +24,5 @@ Aplicacion ASP.NET CORE MVC con Entity Framework Core.
 - Abrir una terminal
 - Ejecutar el comando dotnet restore
 - Iniciar depuracion
+- 
 
