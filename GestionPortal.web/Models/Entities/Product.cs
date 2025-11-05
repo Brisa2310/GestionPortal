@@ -10,7 +10,7 @@ namespace GestionPortal.web.Models.Entities
         [StringLength(60, MinimumLength = 3)]
         [Required]
         public string Name { get; set; }
-        [Range(1, 1000)]
+        [Range(1, 9999)]
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
         [StringLength(60, MinimumLength = 3)]
